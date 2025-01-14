@@ -1,0 +1,17 @@
+# Ativa o mecanismo de reescrita de URL
+RewriteEngine On
+
+# Força o uso de HTTPS (desative esta seção no localhost)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Adiciona "www." no domínio (desative no localhost)
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Redirecionamento de URLs amigáveis
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?a=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ index.php?a=$1&b=$2 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ index.php?a=$1&b=$2&c=$3 [L,QSA]
